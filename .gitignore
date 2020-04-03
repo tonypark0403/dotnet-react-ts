@@ -1,0 +1,8 @@
+.vscode
+.DS_Store
+Debug
+bin
+obj
+
+appsettings.json
+*.db
