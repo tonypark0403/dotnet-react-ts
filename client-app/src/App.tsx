@@ -1,18 +1,31 @@
-import React from "react";
-import { cars } from "./demo";
+import React, { Component } from "react";
 import "./App.css";
-import CarItem from "./CarItem";
+import axios from "axios";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <ul>
-        {cars.map((car) => (
-          <CarItem car={car} />
-        ))}
-      </ul>
-    </div>
-  );
-};
+class App extends Component {
+  state = {
+    values: [],
+  };
+
+  componentDidMount() {
+    axios.get("http://localhost:5000/api/values").then((response) => {
+      console.log(response);
+      this.setState({
+        values: response.data,
+      });
+    });
+  }
+  render() {
+    return (
+      <div className="App">
+        <ul>
+          {this.state.values.map((value: any) => (
+            <li>{value.name}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
